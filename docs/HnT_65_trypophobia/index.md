@@ -45,7 +45,7 @@
 ---- .aligncenter .bg-black
 @unsplash(NGG9VaoTKEw) .dark
 
-.text-intro What need art can be created from
+.text-intro What neat art can be created from
 .text-data generative models?
 
 ---- .aligncenter
