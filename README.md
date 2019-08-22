@@ -4,7 +4,7 @@ A collection of talks, collected all in one place
 
 ### NLP
 
-+ [Presentation to General Assembly, Dec 2018](https://thoppe.github.io/Presentation_Topics/General_Assembly/index.html)
++ [Presentation(s) to General Assembly](https://thoppe.github.io/Presentation_Topics/General_Assembly/index.html)
 
 ### Various
 
