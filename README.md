@@ -1,4 +1,4 @@
-# Presentation Topics in NLP
+# Presentation Topics 
 
 A collection of talks, collected all in one place
 
@@ -8,5 +8,8 @@ A collection of talks, collected all in one place
 
 ### Various
 
++ [Data Science DC: Lightning Round](https://github.com/thoppe/Presentation_Topics/blob/master/docs/DS/Brachistochrone.ipynb)
+
 + [Hack && Tell 65: tripGAN](https://thoppe.github.io/Presentation_Topics/HnT_65_trypophobia/index.html)
+
 
