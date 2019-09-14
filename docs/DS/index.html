@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta content="Travis Hoppe " name="Author"/>
+  <title>
+   Stupid Tensorflow tricks II
+  </title>
+  <link href="static/css/webslides.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="static/css/miniprez.css" media="all" rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;amp;subset=latin-ext" media="all" rel="stylesheet" type="text/css"/>
+  <link href="static/css/font-awesome.min.css" media="all" rel="stylesheet" type="text/css"/>
+  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.css" integrity="sha384-dbVIfZGuN1Yq7/1Ocstc1lUEm+AT+/rCkibIcC/OmWo5f0EA48Vf8CytHzGrSwbQ" media="all" rel="stylesheet" type="text/css"/>
+ </head>
+ <body>
+  <article id="webslides">
+   <section class="slide bg-black" data-slide-number="0">
+    <span class="light background background" style="background-image:url('figures/oQbLeq4nOek.jpg')">
+    </span>
+    <div class="wrap">
+     <div class="aligncenter">
+      <h1 class="text-landing">
+       <strong>
+        Stupid
+       </strong>
+      </h1>
+      <h1 class="text-landing">
+       <strong>
+        Tensorflow
+       </strong>
+      </h1>
+      <h1 class="text-landing">
+       <strong>
+        Tricks
+       </strong>
+      </h1>
+      <p>
+       <span class="text-landing">
+        <strong>
+         part II
+        </strong>
+       </span>
+      </p>
+      <h4>
+       <em>
+        Brachistochrone problem
+       </em>
+      </h4>
+      <br/>
+      <br/>
+      <br/>
+      <p>
+       by
+       <a href="https://twitter.com/metasemantic">
+        <code>
+         @metasemantic
+        </code>
+       </a>
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="slide bg-white aligncenter" data-slide-number="1">
+    <h2>
+     wtf? Stupid Tensorflow?
+     <em>
+      Part II
+     </em>
+     ?
+    </h2>
+    <p>
+     <em>
+      free automatic differentiation
+     </em>
+    </p>
+    <h4>
+     Part I: Thomson Problem
+    </h4>
+    <p>
+     <span aria-hidden="true" class="fa fa-medium">
+      <a href="https://towardsdatascience.com/stupid-tensorflow-tricks-3a837194b7a0">
+       https://towardsdatascience.com/stupid-tensorflow-tricks-3a837194b7a0
+      </a>
+      <img src="figures/1_6wcPkWRp4BYpV_b68sONVw.gif" width="50%"/>
+     </span>
+    </p>
+   </section>
+   <section class="slide bg-black aligncenter" data-slide-number="2">
+    <p>
+     <span class="text-data">
+      <strong>
+       Brachistochrone
+      </strong>
+     </span>
+     <br/>
+     βράχιστος χρόνος:
+     <em>
+      shortest time
+     </em>
+    </p>
+    <span class="align-center">
+     <img src="figures/oldguys.png" width="60%"/>
+    </span>
+    <br/>
+    <p>
+     Newton, l'Hôpital, at least two Bernoullis
+    </p>
+   </section>
+   <section class="slide bg-black aligncenter" data-slide-number="3">
+    <p>
+     <span class="text-data">
+      <strong>
+       Brachistochrone
+      </strong>
+      <br/>
+     </span>
+     βράχιστος χρόνος:
+     <em>
+      shortest time
+     </em>
+    </p>
+    <span class="align-center">
+     <img src="figures/plane.png" width="40%"/>
+    </span>
+   </section>
+   <section class="slide bg-white aligncenter" data-slide-number="4">
+    <style scoped="">
+     code { font-size: 150%;  }
+    </style>
+    <h1 class="text-landing">
+     <strong>
+      Solve with physics
+     </strong>
+    </h1>
+    <p>
+     <em>
+      and tensorflow 2.0!
+     </em>
+    </p>
+    <div class="wrap">
+     <pre><code class="prettyprint">import tensorflow as tf
+import numpy as np
+print(tf.__version__)
+
+# This lets us see computations as soon as we run them!
+tf.enable_eager_execution()
+
+&gt; 1.14.0
+</code></pre>
+     <h3>
+      Conservation of Energy
+     </h3>
+     <div class="block-equation" data-expr="U=K ; mgh = \frac{1}{2}mv^2">
+     </div>
+     <div class="block-equation" data-expr="v = \sqrt{2gh}">
+     </div>
+    </div>
+   </section>
+   <section class="slide wrap" data-slide-number="5">
+    <h1>
+     Time to roll down
+    </h1>
+    <p>
+     can compute for each little segment...
+    </p>
+    <h3>
+     <div class="block-equation" data-expr="z(t) = z_0 + v_0 t + \frac{1}{2}a_z t^2 = z_0 + v_0 t + \frac{g \sin(\theta) t^2}{2}">
+     </div>
+    </h3>
+    <h3>
+     <div class="block-equation" data-expr="t = \frac{-v_0 \pm \sqrt{v_0^2 - 2 g \sin(\theta)z_0}} {g \sin(\theta)}">
+     </div>
+    </h3>
+   </section>
+   <section class="slide aligncenter" data-slide-number="6">
+    <div class="wrap">
+     <h1>
+      <em>
+       Ugh.
+      </em>
+      Can we be lazy?
+     </h1>
+     <p>
+      Over a short enough time span we can ignore gravity, as long as we fix the velocity each segment.
+      <span class="inline-equation" data-expr="z(t) = z_0 + v_0 t ;  t = z_0 / v_0">
+      </span>
+     </p>
+     <h4>
+      <div class="block-equation" data-expr="t = \frac{\sqrt{\Delta x^2 + \Delta y^2}}{v_0}">
+      </div>
+     </h4>
+     <img src="figures/plane_crop.png" width="30%"/>
+    </div>
+   </section>
+   <section class="slide bg-white aligncenter" data-slide-number="7">
+    <h2>
+     Setup the "ramp"
+    </h2>
+    <span class="wrap">
+    </span>
+    <pre><code class="prettyprint">N = 20
+width = 3
+y = tf.Variable(np.linspace(0.99, 0.01, N,), dtype=tf.float32)
+x = tf.linspace(0.0, 1.0, N+2) * width
+print(y)
+
+&lt;tf.Variable 'Variable:0' shape=(20,) dtype=float32, numpy=
+array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
+       0.73210526, 0.6805263 , 0.6289474 , 0.57736844, 0.5257895 ,
+       0.47421053, 0.4226316 , 0.37105262, 0.31947368, 0.26789474,
+       0.21631579, 0.16473684, 0.1131579 , 0.06157895, 0.01      ],
+      dtype=float32)&gt;
+</code></pre>
+   </section>
+   <section class="slide bg-white aligncenter wrap" data-slide-number="8">
+    <h1>
+     Objective function
+    </h1>
+    <pre><code class="prettyprint">def compute_ramp(y):
+    g = tf.constant(9.8)
+
+    # Fix the endpoints
+    y = tf.concat([[1.0], y, [0.0]], axis=0)
+
+    # All the widths are the same
+    dx = x[1] - x[0]
+    dy = y[:-1] - y[1:]   
+    dz = tf.sqrt(dx ** 2 + dy ** 2)
+
+    # Conservation of energy
+    v = tf.sqrt(2 * g * (y[0] - y))
+
+    # The average of the starting and ending velocity at each segment
+    avg_v = (v[1:] + v[:-1]) / 2
+
+    total_time = tf.reduce_sum(dz / avg_v)
+    return total_time
+</code></pre>
+   </section>
+   <section class="slide bg-white aligncenter wrap" data-slide-number="9">
+    <h1>
+     Training step, different in tf 2.0!
+    </h1>
+    <pre><code class="prettyprint">optimizer = tf.train.AdamOptimizer(learning_rate=0.01)
+
+def train_step(y):
+    with tf.GradientTape() as tape:
+        time = compute_ramp(y)
+
+    variables = [y]
+    grads = tape.gradient(time, variables)
+    optimizer.apply_gradients(zip(grads, variables))
+
+    return time.numpy()
+</code></pre>
+   </section>
+   <section class="slide aligncenter" data-slide-number="10">
+    <div class="wrap">
+     <h1>
+      Plot convergence
+     </h1>
+     <p>
+      full code in notebook
+     </p>
+     <img src="figures/final_solution.png" width="60%"/>
+    </div>
+   </section>
+   <section class="slide aligncenter" data-slide-number="11">
+    <div class="wrap">
+     <h1>
+      Did it work? Yes!
+     </h1>
+     <p>
+      Wikipedia's solution below
+     </p>
+     <img src="figures/Brachistochrone.gif" width="60%"/>
+    </div>
+   </section>
+   <section class="slide bg-black aligncenter" data-slide-number="12">
+    <h1>
+     Yeah, so?
+    </h1>
+    <ul>
+     <li>
+      Auto-diff programs like Tensorflow (eg. torch) can do more than deep learning.
+     </li>
+    </ul>
+    <h1>
+     Ok, so all the things?
+    </h1>
+    <ul>
+     <li>
+      Works if your problem can be made smooth.
+     </li>
+    </ul>
+    <h1>
+     I don't want to think too hard.
+    </h1>
+    <ul>
+     <li>
+      On short enough scales, everything is flat.
+     </li>
+    </ul>
+   </section>
+   <section class="slide" data-slide-number="13">
+    <div class="wrap">
+     <h2>
+      <strong>
+       Thanks, you!
+      </strong>
+     </h2>
+     <h4>
+      Contribute, or suggest an issue at
+     </h4>
+     <h2>
+      <a href="https://github.com/thoppe/zerozerozero">
+       https://github.com/thoppe/zerozerozero
+      </a>
+     </h2>
+     <h4>
+      Comment at
+     </h4>
+     <h2>
+      <a href="https://twitter.com/metasemantic?lang=en">
+       @metasemantic
+      </a>
+     </h2>
+    </div>
+   </section>
+  </article>
+  <script src="static/js/jquery-3.1.1.min.js">
+  </script>
+  <script src="static/js/slider.js">
+  </script>
+  <script src="static/js/run_prettify.js">
+  </script>
+  <script crossorigin="anonymous" integrity="sha384-2BKqo+exmr9su6dir+qCw08N2ZKRucY4PrGQPPWU1A7FtlCGjmEGFqXCv5nyM5Ij" src="https://cdn.jsdelivr.net/npm/katex@0.10.1/dist/katex.min.js">
+  </script>
+  <script src="static/js/render_equations.js">
+  </script>
+ </body>
+</html>
