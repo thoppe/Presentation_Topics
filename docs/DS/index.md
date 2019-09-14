@@ -43,7 +43,7 @@ _free automatic differentiation_
 .align-center !(figures/oldguys.png width=60%)
 <br>
 
-Newton, l'Hôpital, at least two Bernoullis ...
+Newton, l'Hôpital, at least two Bernoullis . . .
 
 -------
 
@@ -105,7 +105,7 @@ Over a short enough time span we can ignore gravity, as long as we fix the veloc
 
 ## Setup the "ramp"
 
-.wrap
+..aligncenter
 ``` 
 N = 20
 width = 3
@@ -130,6 +130,7 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
 ...wrap
 
 # Objective function
+..aligncenter
 ```
 def compute_ramp(y):
     g = tf.constant(9.8)
@@ -156,12 +157,13 @@ def compute_ramp(y):
 ------
 
 ...bg-white
-
 ...aligncenter
 
 ...wrap
 
 # Training step, different in tf 2.0!
+
+..aligncenter
 ```
 optimizer = tf.train.AdamOptimizer(learning_rate=0.01)
 
@@ -216,8 +218,9 @@ Wikipedia's solution below
 ## **Thanks, you!**
 #### Comment at
 ## [@metasemantic](https://twitter.com/metasemantic?lang=en)
-### Repo at
-
+#### Repo at
+..aligncenter
+!(figures/qrcode.png width=20%)
 
 
 

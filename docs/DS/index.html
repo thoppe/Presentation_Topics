@@ -102,7 +102,7 @@
     </span>
     <br/>
     <p>
-     Newton, l'Hôpital, at least two Bernoullis
+     Newton, l'Hôpital, at least two Bernoullis . . .
     </p>
    </section>
    <section class="slide bg-black aligncenter" data-slide-number="3">
@@ -195,9 +195,8 @@ tf.enable_eager_execution()
     <h2>
      Setup the "ramp"
     </h2>
-    <span class="wrap">
-    </span>
-    <pre><code class="prettyprint">N = 20
+    <div class="aligncenter">
+     <pre><code class="prettyprint">N = 20
 width = 3
 y = tf.Variable(np.linspace(0.99, 0.01, N,), dtype=tf.float32)
 x = tf.linspace(0.0, 1.0, N+2) * width
@@ -210,12 +209,14 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
        0.21631579, 0.16473684, 0.1131579 , 0.06157895, 0.01      ],
       dtype=float32)&gt;
 </code></pre>
+    </div>
    </section>
    <section class="slide bg-white aligncenter wrap" data-slide-number="8">
     <h1>
      Objective function
     </h1>
-    <pre><code class="prettyprint">def compute_ramp(y):
+    <div class="aligncenter">
+     <pre><code class="prettyprint">def compute_ramp(y):
     g = tf.constant(9.8)
 
     # Fix the endpoints
@@ -235,12 +236,14 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
     total_time = tf.reduce_sum(dz / avg_v)
     return total_time
 </code></pre>
+    </div>
    </section>
    <section class="slide bg-white aligncenter wrap" data-slide-number="9">
     <h1>
      Training step, different in tf 2.0!
     </h1>
-    <pre><code class="prettyprint">optimizer = tf.train.AdamOptimizer(learning_rate=0.01)
+    <div class="aligncenter">
+     <pre><code class="prettyprint">optimizer = tf.train.AdamOptimizer(learning_rate=0.01)
 
 def train_step(y):
     with tf.GradientTape() as tape:
@@ -252,6 +255,7 @@ def train_step(y):
 
     return time.numpy()
 </code></pre>
+    </div>
    </section>
    <section class="slide aligncenter" data-slide-number="10">
     <div class="wrap">
@@ -316,9 +320,12 @@ def train_step(y):
        @metasemantic
       </a>
      </h2>
-     <h3>
+     <h4>
       Repo at
-     </h3>
+     </h4>
+     <div class="aligncenter">
+      <img src="figures/qrcode.png" width="20%"/>
+     </div>
     </div>
    </section>
   </article>
