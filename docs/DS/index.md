@@ -214,11 +214,10 @@ Wikipedia's solution below
 ..wrap
 
 ## **Thanks, you!**
-#### Contribute, or suggest an issue at
-## [https://github.com/thoppe/zerozerozero](https://github.com/thoppe/zerozerozero)
-
 #### Comment at
 ## [@metasemantic](https://twitter.com/metasemantic?lang=en)
+### Repo at
+
 
 
 
