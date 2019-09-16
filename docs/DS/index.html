@@ -181,9 +181,11 @@ tf.enable_eager_execution()
      </h1>
      <p>
       Over a short enough time span we can ignore gravity, as long as we fix the velocity each segment.
-      <span class="inline-equation" data-expr="z(t) = z_0 + v_0 t ;  t = z_0 / v_0">
-      </span>
      </p>
+     <h4>
+      <div class="block-equation" data-expr="z(t) = z_0 + v_0 t \hspace{2em} t = z_0 / v_0">
+      </div>
+     </h4>
      <h4>
       <div class="block-equation" data-expr="t = \frac{\sqrt{\Delta x^2 + \Delta y^2}}{v_0}">
       </div>
@@ -211,7 +213,7 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
 </code></pre>
     </div>
    </section>
-   <section class="slide bg-white aligncenter wrap" data-slide-number="8">
+   <section class="slide bg-white aligncenter" data-slide-number="8">
     <h1>
      Objective function
     </h1>
@@ -227,7 +229,7 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
     dy = y[:-1] - y[1:]   
     dz = tf.sqrt(dx ** 2 + dy ** 2)
 
-    # Conservation of energy
+    # Conservation of energy: mgh = (1/2)mv^2 
     v = tf.sqrt(2 * g * (y[0] - y))
 
     # The average of the starting and ending velocity at each segment
@@ -238,7 +240,7 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
 </code></pre>
     </div>
    </section>
-   <section class="slide bg-white aligncenter wrap" data-slide-number="9">
+   <section class="slide bg-white aligncenter" data-slide-number="9">
     <h1>
      Training step, different in tf 2.0!
     </h1>
@@ -321,7 +323,10 @@ def train_step(y):
       </a>
      </h2>
      <h4>
-      Repo at
+      scan QR for the
+      <a href="https://github.com/thoppe/Presentation_Topics/blob/master/docs/DS/Brachistochrone.ipynb">
+       notebook
+      </a>
      </h4>
      <div class="aligncenter">
       <img src="figures/qrcode.png" width="20%"/>

@@ -94,7 +94,8 @@ can compute for each little segment...
 ...aligncenter
 ..wrap
 # _Ugh._ Can we be lazy?
-Over a short enough time span we can ignore gravity, as long as we fix the velocity each segment. $ z(t) = z_0 + v_0 t ;  t = z_0 / v_0  $
+Over a short enough time span we can ignore gravity, as long as we fix the velocity each segment.
+#### $$ z(t) = z_0 + v_0 t \hspace{2em}  t = z_0 / v_0  $$
 #### $$ t = \frac{\sqrt{\Delta x^2 + \Delta y^2}}{v_0}  $$
 !(figures/plane_crop.png width=30%)
 
@@ -127,8 +128,6 @@ array([0.99      , 0.9384211 , 0.88684213, 0.83526313, 0.7836842 ,
 ...bg-white
 ...aligncenter
 
-...wrap
-
 # Objective function
 ..aligncenter
 ```
@@ -143,7 +142,7 @@ def compute_ramp(y):
     dy = y[:-1] - y[1:]   
     dz = tf.sqrt(dx ** 2 + dy ** 2)
 
-    # Conservation of energy
+    # Conservation of energy: mgh = (1/2)mv^2 
     v = tf.sqrt(2 * g * (y[0] - y))
     
     # The average of the starting and ending velocity at each segment
@@ -159,7 +158,6 @@ def compute_ramp(y):
 ...bg-white
 ...aligncenter
 
-...wrap
 
 # Training step, different in tf 2.0!
 
@@ -218,11 +216,6 @@ Wikipedia's solution below
 ## **Thanks, you!**
 #### Comment at
 ## [@metasemantic](https://twitter.com/metasemantic?lang=en)
-#### Repo at
+#### scan QR for the [notebook](https://github.com/thoppe/Presentation_Topics/blob/master/docs/DS/Brachistochrone.ipynb)
 ..aligncenter
 !(figures/qrcode.png width=20%)
-
-
-
-
-
