@@ -4,6 +4,7 @@ A collection of talks, collected all in one place
 
 ### NLP
 
++ [Code for R+ Friends Talk](https://thoppe.github.io/Presentation_Topics/Rp_friends_talk)
 + [Presentation(s) to General Assembly](https://thoppe.github.io/Presentation_Topics/General_Assembly/index.html)
 
 ### Various
